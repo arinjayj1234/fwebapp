@@ -1,28 +1,25 @@
+nosex = 0;
+nosey = 0;
+
+
 function preload(){
+  chad=loadImage("https://i.postimg.cc/t4GF8h57/m.png");
 }
 
 function setup(){
   canvas = createCanvas(640, 480);
-  canvas.position(610, 250);
+  canvas.center();
   video = createCapture(VIDEO);
   video.size(640, 480);
   video.hide();  
 
-  nosex = 0;
-  nosey = 0;
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
   
 }
-function draw(){
-  image(video, 0, 0, 640, 480);
-}
 
 function modelLoaded(){
   console.log('mloaded');
-}
-
-function takeSnapshot(){
 }
 
 function gotPoses(results){
@@ -31,3 +28,11 @@ function gotPoses(results){
   console.log("Nose X is " + nosex +" Nose Y is " +nosey);
 }
 
+function draw(){
+  image(video, 0, 0, 640, 480);
+  image(chad, nosex-50, nosey-10, 120, 80);
+}
+
+function takeSnapshot(){
+  save("stachePic.png");
+}
